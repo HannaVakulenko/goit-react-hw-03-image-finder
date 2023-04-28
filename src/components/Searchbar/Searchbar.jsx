@@ -10,23 +10,25 @@ export class Searchbar extends Component {
 
   onChangeInput = e => {
     const { value } = e.currentTarget;
-    this.setState({ searchValue: value });
+    const validValue = value.trim().toLowerCase();
+    this.setState({ searchValue: validValue });
   };
 
   onSearchImage = e => {
     e.preventDefault();
+    const { searchValue } = this.state;
 
-    if (!this.state.searchValue) {
+    if (!searchValue) {
       return toast.error('Enter text for search.');
     }
 
-    const { searchValue } = this.state;
-    this.setState({ searchValue: '' });
-
     this.props.onSubmit(searchValue);
+
+    this.setState({ searchValue: '' });
   };
 
   render() {
+    const { searchValue } = this.state;
     return (
       <SearchForm onSubmit={this.onSearchImage}>
         <SearchButton type="submit">
@@ -39,6 +41,7 @@ export class Searchbar extends Component {
           autoFocus
           onChange={this.onChangeInput}
           placeholder="Search images and photos"
+          value={searchValue}
         ></SearchInput>
       </SearchForm>
     );

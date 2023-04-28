@@ -86,6 +86,7 @@ export class App extends Component {
 
   render() {
     const {
+      searchText,
       loading,
       images,
       error,
@@ -109,7 +110,8 @@ export class App extends Component {
 
           {total === 0 && (
             <h2 style={{ textAlign: 'center' }}>
-              Sorry, there are no images matching your search...
+              Sorry, there are no images matching your request "{searchText}
+              "...
             </h2>
           )}
 
